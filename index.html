@@ -21,7 +21,9 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root[data-theme="dark"]{color-scheme:dark;--bg:#1c1726;--bg2:#262033;--ink:#efe7f5;--soft:#b9afc9;--plum:#b9a3e6;--lilac:#4a3d68;--sage:#9cc2a6;--card:#251f31;--line:#5a4b78}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;scroll-padding-top:calc(4.5rem + env(safe-area-inset-top,0px));overflow-x:hidden;max-width:100%}
+html.scroll-locked{overflow:hidden;scroll-behavior:auto!important}
 body{background:var(--bg);color:var(--ink);font:400 1.15rem/1.7 Figtree,system-ui,sans-serif;overflow-x:hidden;max-width:100%;position:relative}
+html.scroll-locked body{position:fixed;top:var(--scroll-lock-top);left:0;right:0;width:100%;overflow:hidden}
 h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.05;letter-spacing:-.01em}
 .script{font-family:"Dancing Script","Segoe Script",cursive;color:var(--sage);font-weight:500}
 a{color:inherit}
@@ -48,7 +50,7 @@ nav a.tb{background:var(--plum);color:var(--bg)}
 .sw .k{position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:var(--plum);color:var(--bg);display:grid;place-items:center;font-size:.72rem;line-height:1;transition:transform .25s}
 .sw .k::after{content:"☀"}
 .sw[aria-checked="true"] .k{transform:translateX(24px)}
-.sw[aria-checked="true"] .k::after{content:"☾"}
+.sw[aria-checked="true"] .k::after{content:"⏾"}
 /* hero */
 .hero{min-height:0;display:grid;align-items:end;padding:6.5rem 0 4rem;overflow:hidden}
 .bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
@@ -145,14 +147,14 @@ details ul{padding-left:1.1rem;margin-top:.9rem;color:var(--soft);font-size:1.05
 .contact .sub{margin-top:.6rem;font-size:2rem}
 .contact .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2.4rem;align-items:stretch}
 .cstack{display:grid;grid-template-rows:auto minmax(0,1fr);gap:1.2rem;align-content:stretch}
-.cc{display:grid;grid-template-columns:48px 1fr;gap:1.1rem;align-items:center;padding:1.4rem 1.5rem;background:var(--card);border:2px solid var(--line);border-radius:30px 10px 30px 10px;text-decoration:none;transition:border-color .2s,background .2s;min-width:0}
+.cc{display:grid;grid-template-columns:48px 1fr;gap:1.1rem;align-items:center;padding:1.4rem 1.5rem;background:var(--card);border:2px solid var(--line);border-radius:30px 10px 30px 10px;text-decoration:none;transition:border-color .2s;min-width:0}
 .cc:hover,.cc:focus-visible{border-color:var(--plum);background:var(--bg2)}
 .cc small{display:block;color:var(--soft);font-size:1rem}
 .cc b{display:block;font:500 clamp(1.5rem,4vw,2.2rem)/1.1 "Cormorant Garamond",serif;color:var(--plum);overflow-wrap:anywhere}
 .cc.main{background:var(--plum);border-color:var(--plum)}.cc.main small,.cc.main b{color:var(--bg)}.cc.main .draw{color:var(--bg)}.cc.main .draw *{fill:none}
 .phone-contact{grid-template-columns:48px minmax(0,1fr) auto}.phone-contact .phone-number{display:block;color:var(--bg);font:500 clamp(1.5rem,4vw,2.2rem)/1.1 "Cormorant Garamond",serif;text-decoration:none}.phone-contact .phone-number:hover,.phone-contact .phone-number:focus-visible{text-decoration:underline}.copy-phone{display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:transparent;color:var(--bg);cursor:pointer}.copy-phone svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.copy-phone:hover,.copy-phone:focus-visible{background:rgba(255,255,255,.16)}
-.contact-options{display:flex;flex-direction:column;padding:1rem;background:var(--bg2);border:1px solid var(--line);border-radius:22px 8px 22px 8px}.contact-options>p{margin:0 0 .7rem;color:var(--soft);font-weight:600}.contact-actions{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:minmax(110px,1fr);flex:1;gap:.65rem;align-items:stretch;align-content:stretch}.contact-actions a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-width:0;min-height:0;height:100%;padding:.65rem .3rem;border:2px solid var(--line);border-radius:20px 8px 20px 8px;color:var(--plum);background:var(--card);font-size:clamp(.76rem,2.8vw,.95rem);font-weight:600;line-height:1.15;text-align:center;text-decoration:none;overflow-wrap:anywhere;transition:border-color .2s,background .2s}.contact-actions a:nth-child(-n+3){grid-column:span 2}.contact-actions a:nth-child(n+4){grid-column:span 3}.contact-actions a:hover,.contact-actions a:focus-visible{border-color:var(--plum);background:var(--bg)}.contact-actions svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}.contact-actions .contact-detail{font-size:.68rem;font-weight:400;opacity:.85}.contact-actions a:nth-child(n+4) .contact-detail{font-size:clamp(.78rem,3vw,1rem)}
-.contact-email{grid-column:span 3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-width:0;min-height:0;height:100%;padding:.65rem .3rem;border:2px solid var(--line);border-radius:20px 8px 20px 8px;color:var(--plum);background:var(--card);font-size:clamp(.76rem,2.8vw,.95rem);font-weight:600;line-height:1.15;text-align:center;overflow-wrap:anywhere}.contact-email>svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}.contact-email .contact-detail{font-size:clamp(.78rem,3vw,1rem);font-weight:400}.contact-email .email-address{color:var(--plum);text-decoration:none}.contact-email .email-address:hover,.contact-email .email-address:focus-visible{text-decoration:underline}.email-actions{display:flex;justify-content:center}.email-actions button{padding:.1rem .2rem;border:0;background:transparent;color:var(--soft);font:400 .75rem Figtree,sans-serif;text-decoration:underline;text-underline-offset:2px;cursor:pointer}.email-actions button:hover,.email-actions button:focus-visible{color:var(--plum)}
+.contact-options{display:flex;flex-direction:column;padding:1rem;background:var(--bg2);border:1px solid var(--line);border-radius:22px 8px 22px 8px}.contact-options>p{margin:0 0 .7rem;color:var(--soft);font-weight:600}.contact-actions{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:minmax(110px,1fr);flex:1;gap:.65rem;align-items:stretch;align-content:stretch}.contact-actions a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-width:0;min-height:0;height:100%;padding:.65rem .3rem;border:2px solid var(--line);border-radius:20px 8px 20px 8px;color:var(--plum);background:var(--card);font-size:clamp(.76rem,2.8vw,.95rem);font-weight:600;line-height:1.15;text-align:center;text-decoration:none;overflow-wrap:anywhere;transition:border-color .2s}.contact-actions a:nth-child(-n+3){grid-column:span 2}.contact-actions a:nth-child(n+4){grid-column:span 3}.contact-actions a:hover,.contact-actions a:focus-visible{border-color:var(--plum);background:var(--bg)}.contact-actions svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}.contact-actions .contact-detail{font-size:.68rem;font-weight:400;opacity:.85}.contact-actions a:nth-child(n+4) .contact-detail{font-size:clamp(.78rem,3vw,1rem)}
+ .contact-email{grid-column:span 3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;min-width:0;min-height:0;height:100%;padding:.65rem .3rem;border:2px solid var(--line);border-radius:20px 8px 20px 8px;color:var(--plum);background:var(--card);font-size:clamp(.76rem,2.8vw,.95rem);font-weight:600;line-height:1.15;text-align:center;overflow-wrap:anywhere;transition:border-color .2s}.contact-email>svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}.contact-email .contact-detail{font-size:clamp(.78rem,3vw,1rem);font-weight:400}.contact-email .email-address{color:var(--plum);text-decoration:none}.contact-email .email-address:hover,.contact-email .email-address:focus-visible{text-decoration:underline}.email-actions{display:flex;justify-content:center}.email-actions button{padding:.1rem .2rem;border:0;background:transparent;color:var(--soft);font:400 .75rem Figtree,sans-serif;text-decoration:underline;text-underline-offset:2px;cursor:pointer}.email-actions button:hover,.email-actions button:focus-visible{color:var(--plum)}
 .contact-email{position:relative}.contact-actions .email-card-open{position:absolute;inset:0;z-index:0;display:block;min-width:0;min-height:0;padding:0;border:0;border-radius:inherit;background:transparent;box-shadow:none;text-decoration:none;transition:none}.contact-actions .email-card-open:hover,.contact-actions .email-card-open:focus-visible{border:0;background:transparent}.contact-email>span{position:relative;z-index:1;pointer-events:none}.contact-email:focus-within{border-color:var(--plum)}.email-top{position:relative;z-index:1;display:flex;align-items:center;gap:.55rem;pointer-events:none}.email-top>svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.email-copy{position:relative;z-index:2;display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--soft);cursor:pointer;pointer-events:auto}.email-copy svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.email-copy:hover,.email-copy:focus-visible{border-color:var(--line);background:var(--bg2);color:var(--plum)}
 .contact-email:has(.email-card-open:hover){border-color:var(--plum);background:var(--bg)}
 .copy-phone,.email-copy{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -230,7 +232,8 @@ section[id]:not(.pick){scroll-margin-top:calc(-1*var(--pt) + .5rem)}
 #lb{border:0;padding:0;background:transparent;color:var(--ink);border-radius:24px;max-width:min(96vw,900px);max-height:96vh;overflow:hidden;margin:auto}
 #lb.outside{overflow:visible}
 #lb::backdrop{background:rgba(20,14,30,.82)}
-#lb img{display:block;max-width:100%;max-height:94vh;width:auto;height:auto;margin:0 auto;touch-action:pan-y}
+#lb[open]{overscroll-behavior:none;touch-action:none}
+#lb img{display:block;max-width:100%;max-height:94vh;width:auto;height:auto;margin:0 auto;touch-action:none}
 #lb p{position:absolute;left:0;right:0;bottom:0;margin:0;padding:2.2rem 1.4rem 1rem;text-align:center;color:#fff;background:linear-gradient(to top,rgba(20,14,30,.7),rgba(20,14,30,0))}
 #lb button{position:absolute;width:48px;height:48px;border-radius:50%;border:0;background:var(--plum);color:var(--bg);font:600 1.8rem/1 Figtree,sans-serif;cursor:pointer;display:grid;place-items:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 #lb .lx{top:.6rem;right:.6rem}#lb .ln{top:50%;transform:translateY(-50%)}#lb .lp{left:.6rem}#lb .nx{right:.6rem}#lb.outside .lp{left:-64px}#lb.outside .nx{right:-64px}
@@ -362,7 +365,7 @@ section[id]:not(.pick){scroll-margin-top:calc(-1*var(--pt) + .5rem)}
     <li>Ošetření trvá 60–90 minut podle typu masáže a vašich potřeb.</li></ul></details></div>
   <div class="note">
     <div><h3>Sleva 150 Kč</h3><ul><li>pro studující do 20 let</li><li>pro důchodce</li></ul></div>
-    <div><h3>Jak často?</h3><ul><li>Četnost záleží na vašich potřebách a na tom, jak masáž snášíte.</li><li>Další termín domluvíme společně.</li><li>Při přetrvávajících potížích se poraďte se zdravotníkem.</li></ul></div>
+    <div><h3>Jak často?</h3><ul><li>Četnost záleží na vašich potřebách a na tom, jak masáž snášíte.</li><li>Další termín se mnou domluvíte podle svých potřeb.</li><li>Při přetrvávajících potížích se poraďte se zdravotníkem.</li></ul></div>
       </div>
 </div></section>
 
@@ -370,9 +373,9 @@ section[id]:not(.pick){scroll-margin-top:calc(-1*var(--pt) + .5rem)}
   <h2>Co vás čeká při první návštěvě</h2>
   <p class="script" style="font-size:1.8rem;margin-top:.8rem">Klid. Naslouchání. Individuální přístup.</p>
   <ol class="steps">
-    <li><h3>Poznáváme váš příběh</h3><p>Sedneme si a popovídáme: co vás trápí, jak dlouho, jaký vedete životní styl a jaké máte léky, alergie nebo zdravotní omezení.</p></li>
-    <li><h3>Orientační zhodnocení</h3><p>Probereme, co vás trápí a jaká máte zdravotní omezení. Podle potřeby se podíváme na držení těla nebo rozsah pohybu, abych mohla masáž přizpůsobit. Nejde o lékařské vyšetření ani stanovení diagnózy.</p></li>
-    <li><h3>Terapie na míru</h3><p>Společně určíme cíl: relaxace, rekondice, nebo úleva od bolesti.</p></li>
+    <li><h3>Poznám váš příběh</h3><p>Posadíme se a popovídáme si o tom, co vás trápí, jak dlouho, jaký vedete životní styl a jaké užíváte léky. Probereme také alergie a zdravotní omezení.</p></li>
+    <li><h3>Orientační zhodnocení</h3><p>Proberu s vámi, co vás trápí a jaká máte zdravotní omezení. Podle potřeby zhodnotím držení těla nebo rozsah pohybu, abych mohla masáž přizpůsobit. Nejde o lékařské vyšetření ani stanovení diagnózy.</p></li>
+    <li><h3>Terapie na míru</h3><p>Společně si stanovíme cíl masáže: relaxaci, rekondici, nebo úlevu od bolesti.</p></li>
     <li><h3>Samotná masáž</h3><p>Jemné uvolnění, hlavní terapeutická část a závěrečné zklidnění. Pracuji s respektem k tomu, co vaše tělo právě potřebuje.</p></li>
     <li><h3>Po masáži</h3><p>Ještě chvíli odpočinete. Pomalé posazení, sklenice vody a doporučení další hodiny.</p></li>
     <li><h3>Péče pokračuje doma</h3><p>Podle potřeby doporučím jednoduché cviky, správné sezení a drobné změny v běžném životě.</p></li>
@@ -400,7 +403,7 @@ section[id]:not(.pick){scroll-margin-top:calc(-1*var(--pt) + .5rem)}
       <li>Masírovaná oblast může být několik hodin citlivá.</li>
       <li>Pijte, pomůžete tak odvodu látek uvolněných při masáži.</li>
       <li>Dbejte na spánek (chladnější místnost, 7–8 hodin) a na pravidelný pohyb. Při sedavé práci pomáhá pravidlo 45/5.</li>
-      <li>Termín případné další masáže domluvíme podle vašich potřeb a reakce těla. Při přetrvávající bolesti se obraťte na zdravotníka.</li></ul></details>
+      <li>Termín případné další masáže se mnou domluvíte podle svých potřeb a reakce těla. Při přetrvávající bolesti se obraťte na zdravotníka.</li></ul></details>
   </div>
 </div></section>
 
@@ -460,7 +463,7 @@ else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.is
 /* náhodné rozsvícení slov – jen na dotykových zařízeních */
 /* hlavička a šipka při scrollu */
 var nav=document.querySelector('nav'),up=document.getElementById('nahoru'),mn=document.getElementById('menu'),theme=document.getElementById('tema'),ly=0,dn=0,tk=0;
-function sc(){tk=0;var y=scrollY,d=y-ly;
+function sc(){tk=0;if(document.documentElement.classList.contains('scroll-locked'))return;var y=scrollY,d=y-ly;
 if(y<150||d<-2){nav.classList.remove('hide');dn=0}else if(d>0){dn+=d;if(dn>70)nav.classList.add('hide')}
 ly=y;up.classList.toggle('show',y>mn.offsetTop+mn.offsetHeight);var tr=theme.getBoundingClientRect();if(tr.top<innerHeight&&tr.bottom>0)up.style.bottom=Math.max(0,innerHeight-tr.top+55)+'px';else up.style.bottom=''}
 addEventListener('scroll',function(){if(!tk)tk=requestAnimationFrame(sc)},{passive:true});sc();
@@ -472,12 +475,15 @@ new IntersectionObserver(function(es,o){if(es[0].isIntersecting){o.disconnect();
 </script>
 <dialog id="lb" aria-label="Fotografie masérny"><button class="lx" type="button" aria-label="Zavřít">×</button><button class="ln lp" type="button" aria-label="Předchozí">‹</button><button class="ln nx" type="button" aria-label="Další">›</button><img alt=""><p></p></dialog>
 <script>
-(function(){var d=document.getElementById('lb'),im=d.querySelector('img'),cp=d.querySelector('p'),fs=[].slice.call(document.querySelectorAll('.pl figure')),k=0;
+(function(){var d=document.getElementById('lb'),im=d.querySelector('img'),cp=d.querySelector('p'),fs=[].slice.call(document.querySelectorAll('.pl figure')),k=0,scrollY=0;
 var prev=d.querySelector('.lp'),next=d.querySelector('.nx');
+function lockScroll(){scrollY=window.scrollY;document.documentElement.style.setProperty('--scroll-lock-top',-scrollY+'px');document.documentElement.classList.add('scroll-locked')}
+function unlockScroll(){var root=document.documentElement,oldBehavior=root.style.scrollBehavior;root.style.scrollBehavior='auto';root.classList.remove('scroll-locked');root.style.removeProperty('--scroll-lock-top');window.scrollTo(0,scrollY);requestAnimationFrame(function(){root.style.scrollBehavior=oldBehavior})}
 function positionNav(){var r=im.getBoundingClientRect(),space=Math.max(prev.offsetWidth,next.offsetWidth)+16;d.classList.toggle('outside',r.left>=space&&innerWidth-r.right>=space)}
 function show(i){k=(i+fs.length)%fs.length;var f=fs[k].querySelector('img');im.src=f.src;im.alt=f.alt;cp.textContent=fs[k].querySelector('figcaption').textContent;requestAnimationFrame(positionNav)}
 im.addEventListener('load',positionNav);addEventListener('resize',positionNav);
-fs.forEach(function(f,i){f.querySelector('.zoom').addEventListener('click',function(){show(i);d.showModal();requestAnimationFrame(positionNav)})});
+fs.forEach(function(f,i){f.querySelector('.zoom').addEventListener('click',function(){show(i);lockScroll();d.showModal();requestAnimationFrame(positionNav)})});
+d.addEventListener('close',unlockScroll);
 d.querySelector('.lx').onclick=function(){d.close()};
 prev.onclick=function(){show(k-1)};next.onclick=function(){show(k+1)};
 var sx=0,sy=0;im.addEventListener('pointerdown',function(e){if(e.pointerType==='touch'){sx=e.clientX;sy=e.clientY;im.setPointerCapture(e.pointerId)}});im.addEventListener('pointerup',function(e){if(e.pointerType!=='touch')return;var dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.25)show(k+(dx<0?1:-1))});
